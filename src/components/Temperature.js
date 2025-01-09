@@ -2,7 +2,7 @@ import React from 'react';
 
 
 
-export function TemperatureSearch({temperature},{setTemperature}) {
+export function TemperatureSearch({temperature,setTemperature}) {
   
   
 

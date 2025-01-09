@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 
-export function Activity() {
+export function Activity({activity, setActivity}) {
 
-    const [activity, setActivity] = useState("beach");
     
     return (
 

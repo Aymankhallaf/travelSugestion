@@ -17,7 +17,7 @@ export function Search() {
         <form>
             <label>Search: </label>
             <TemperatureSearch temperature={temperature} setTemperature={setTemperature} />
-            <Activity />
+            <Activity activity={activity} setActivity={setActivity} />
             <TravelDate />
             <button onClick={handleSearch}>Search</button>
 
