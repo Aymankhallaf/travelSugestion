@@ -1,13 +1,13 @@
 
 import './App.css';
-import { Card } from './components/result/Destinations';
+import { Destinations } from './components/result/Destination';
 import {Search} from './components/search/Search';
 
 function App() {
   return (
     <div className="App">
       <Search />
-      <Card />
+      <Destinations />
     </div>
   );
 }
