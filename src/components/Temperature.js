@@ -1,9 +1,10 @@
-import React, {useState} from 'react';
+import React from 'react';
 
 
 
-export function TemperatureSearch() {
-  const [temperature, setTemperature] = useState(25);
+export function TemperatureSearch({temperature},{setTemperature}) {
+  
+  
 
     return (<div>
         <label>Preferred Temperature (°C): </label>

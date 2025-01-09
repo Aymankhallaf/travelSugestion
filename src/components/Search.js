@@ -3,17 +3,20 @@ import { TemperatureSearch } from './Temperature';
 import { Activity } from './Activity';
 import TravelDate from './TravelDate';
 
-export function Search() {  
+export function Search() {
+    const [temperature, setTemperature] = useState(25);
+    const [activity, setActivity] = useState("beach");
+    const [date, setDate] = useState('');
 
-    const handleSearch = () => {
 
-        console.log("Search button clicked");
+    const handleSearch = (e) => {
+        e.preventDefault();
     };
 
     return (
         <form>
             <label>Search: </label>
-            <TemperatureSearch />
+            <TemperatureSearch temperature={temperature} setTemperature={setTemperature} />
             <Activity />
             <TravelDate />
             <button onClick={handleSearch}>Search</button>
