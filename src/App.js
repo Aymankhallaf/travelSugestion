@@ -1,12 +1,12 @@
 
 import './App.css';
-import { TemperatureSearch } from './components/Temperature';
+import {Search} from './components/Search';
 
 function App() {
   return (
     <div className="App">
-<TemperatureSearch />
-  
+      <Search />
+
     </div>
   );
 }
