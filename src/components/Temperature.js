@@ -10,7 +10,9 @@ export function TemperatureSearch() {
         <input
           type="number"
           value={temperature}
-          onChange={(e) => setTemperature(e.target.value)}
+          onChange={(e) =>{ 
+            setTemperature(e.target.value);
+        console.log(e.target.value); }}
         />
       </div>);
 }
