@@ -1,15 +1,23 @@
 import React, { useState } from 'react';
 import { TemperatureSearch } from './Temperature';
 import { Activity } from './Activity';
+import TravelDate from './TravelDate';
 
 export function Search() {  
 
+    const handleSearch = () => {
+
+        console.log("Search button clicked");
+    };
 
     return (
-        <div>
+        <form>
             <label>Search: </label>
             <TemperatureSearch />
             <Activity />
-        </div>
+            <TravelDate />
+            <button onClick={handleSearch}>Search</button>
+
+        </form>
     );
 }
