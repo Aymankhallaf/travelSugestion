@@ -7,7 +7,7 @@ export function Activity({activity, setActivity}) {
 
            <div>
         <label>Activity: </label>
-        <select value={activity} onChange={(e) => { setActivity(e.target.value); console.log(e.target.value)}
+        <select value={activity} onChange={(e) => { setActivity(e.target.value);}
             }>
             <option value="beach">Beach</option>
             <option value="beach">Family</option>

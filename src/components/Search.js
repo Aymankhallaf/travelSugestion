@@ -11,6 +11,8 @@ export function Search() {
 
     const handleSearch = (e) => {
         e.preventDefault();
+        console.log(`Temperature: ${temperature}`);
+        console.log(`Activity: ${activity}`);
     };
 
     return (
