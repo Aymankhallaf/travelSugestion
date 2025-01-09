@@ -13,7 +13,7 @@ export function Search() {
         e.preventDefault();
         console.log(`Temperature: ${temperature}`);
         console.log(`Activity: ${activity}`);
-        console.log(`Travel Date: ${traveldate.toString()}`);
+        console.log(`Travel Date: ${traveldate}`);
     };
 
     return (

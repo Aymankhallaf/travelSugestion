@@ -12,7 +12,7 @@ export function TemperatureSearch({ temperature, setTemperature }) {
       type="number"
       value={temperature}
       onChange={(e) => {
-        setTemperature(e.target.value);
+        setTemperature(Number(e.target.value));
       }}
     />
   </div>);
