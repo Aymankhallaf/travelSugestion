@@ -1,11 +1,8 @@
-import React, { useState } from 'react';
+import React from 'react';
 
-const TravelDate = () => {
-    const [date, setDate] = useState('');
 
-    const handleDateChange = (event) => {
-        setDate(event.target.value);
-    };
+export  function TravelDate ({travelDate, setTravelDate}) {
+
 
     return (
         <div>
@@ -13,12 +10,10 @@ const TravelDate = () => {
             <input 
                 type="date" 
                 id="travel-date" 
-                value={date} 
-                onChange={handleDateChange} 
+                value={travelDate} 
+                onChange={setTravelDate} 
             />
-            <p>Selected Date: {date}</p>
+            <p>Selected Date: {travelDate}</p>
         </div>
     );
-};
-
-export default TravelDate;
+}
