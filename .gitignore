@@ -1,0 +1,24 @@
+# Composer dependencies
+/backend/vendor/
+
+# Node.js dependencies
+/frontend/node_modules/
+
+# React build files
+/frontend/build/
+
+# Environment variables
+.env
+
+# IDE and editor files
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Log files
+*.log
+
+# System files
+.DS_Store
+Thumbs.db
