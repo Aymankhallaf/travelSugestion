@@ -35,6 +35,8 @@ export function Search() {
         weather: 'Sunny',
         activities: ['Wailea Beach', 'Road to Hana'],
     },]);
+// Results to test API calls;
+const [result, setResult] = useState();
 
     const handleSearch = async (e) => {
         e.preventDefault();
@@ -48,22 +50,26 @@ export function Search() {
 
         try {
             // Send a POST request to the backend using Axios
-            const response = await axios.post('http://localhost:8080/api.php', searchData, {
+            const response = await axios.post('http://localhost:8080/backend/api.php', searchData, {
                 headers: {
                     'Content-Type': 'application/json'
                 },
             });
 
             const data = response.data;
-            console.log(data);
+            console.log(data.message);
+            setResult(data.message);
 
         } catch (error) {
             console.error('Error fetching data:', error);
+            setResult(error.message);
+
         }
     }
 
     return (
         <div>
+              <div>{result}</div>      
             <form>
                 <label>Search: </label>
                 <TemperatureSearch temperature={temperature} setTemperature={setTemperature} />
