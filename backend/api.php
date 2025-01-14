@@ -13,23 +13,17 @@ $dotenv->load();
 // $data = json_decode(file_get_contents('php://input'), true);
 // var_dump(value: $data);
 
-if (isset($_ENV['DB_HOST'])) {
-    echo $_ENV['DB_HOST'];
-} else {
-    echo "Environment variable not set.";
-}
 
-var_dump ($_ENV);
 
-// $client = new \GuzzleHttp\Client();
+$client = new \GuzzleHttp\Client();
 
-// $response = $client->request('GET', 'https://api.content.tripadvisor.com/api/v1/location/search?key=api&searchQuery=swimming&language=en', [
-//     'headers' => [
-//         'accept' => 'application/json',
-//     ],
-// ]);
+$response = $client->request('GET', 'https://api.content.tripadvisor.com/api/v1/location/search?key='.$_ENV["ApiTripadvisor"].'&searchQuery=swimming&language=en', [
+    'headers' => [
+        'accept' => 'application/json',
+    ],
+]);
 
-// echo $response->getBody();
+echo $response->getBody();
 
 
 
