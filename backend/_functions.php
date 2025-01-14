@@ -130,9 +130,9 @@ function getTripadvisorPhotos(string $locationId, LoggerInterface $logger = null
  * @param string $location The city or location name.
  * @param string $date The date in YYYY-MM-DD format.
  * @param LoggerInterface|null $logger Optional PSR-3 logger.
- * @return array|null The temperature forecast or null on failure.
+ * @return array|null The weather forecast or null on failure.
  */
-function getCityTemperature(string $location, string $date, LoggerInterface $logger = null): ?array
+function getCityWeather(string $location, string $date, LoggerInterface $logger = null): ?array
 {
     if (!isset($_ENV["WEATHERAPI_KEY"]) || empty($_ENV["WEATHERAPI_KEY"])) {
         throw new RuntimeException('Visual Crossing API key is not set in environment variables.');
@@ -159,24 +159,23 @@ function getCityTemperature(string $location, string $date, LoggerInterface $log
             throw new RuntimeException('Failed to decode JSON response.');
         }
 
-        // Extract weather data for the specific date
-        foreach ($data['forecast']['forecastday'] as $forecastDay) {
-            if ($forecastDay['date'] === $date) {
-                return [
-                    'date' => $forecastDay['date'],
-                    'avg_temperature' => $forecastDay['day']['avgtemp_c'],
-                    'max_temperature' => $forecastDay['day']['maxtemp_c'],
-                    'min_temperature' => $forecastDay['day']['mintemp_c'],
-                    'conditions' => $forecastDay['day']['condition']['text'],
-                    'wind_speed' => $forecastDay['day']['maxwind_kph'],
-                    'humidity' => $forecastDay['day']['avghumidity'],
-                    'chance_of_rain' => $forecastDay['day']['daily_chance_of_rain'],
-                    'uv_index' => $forecastDay['day']['uv'],
-                ];
-            }
-        }
+        $forecastDay = $data['days'][0]; // First (and only) day in the array
 
-        throw new RuntimeException("No forecast data found for the date: $date.");
+        return [
+            'date' => $forecastDay['datetime'],
+            'avg_temperature' => $forecastDay['temp'],
+            'max_temperature' => $forecastDay['tempmax'],
+            'min_temperature' => $forecastDay['tempmin'],
+            'conditions' => $forecastDay['conditions'],
+            'wind_speed' => $forecastDay['windspeed'],
+            'humidity' => $forecastDay['humidity'],
+            'chance_of_rain' => $forecastDay['precipprob'],
+            'uv_index' => $forecastDay['uvindex'],
+            'sunrise' => $forecastDay['sunrise'],
+            'sunset' => $forecastDay['sunset'],
+            'icon' => $forecastDay['icon'], // Weather icon
+        ];
+        
     } catch (GuzzleException $e) {
         if ($logger !== null) {
             $logger->error('Visual Crossing request failed: ' . $e->getMessage(), [
