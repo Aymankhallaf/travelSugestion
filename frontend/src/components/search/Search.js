@@ -57,8 +57,8 @@ const [result, setResult] = useState();
             });
 
             const data = response.data;
-            console.log(data.message);
-            setResult(data.message);
+            console.log(data);
+            setResult(data);
 
         } catch (error) {
             console.error('Error fetching data:', error);
