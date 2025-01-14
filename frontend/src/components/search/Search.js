@@ -5,6 +5,7 @@ import { TravelDate } from './TravelDate';
 import { Destination } from '../result/Destination';
 import { fetchDestinations } from '../api/activity';
 import { fetchWeather } from '../api/weather';
+import axios from 'axios';
 
 export function Search() {
     const [temperature, setTemperature] = useState(25);
@@ -35,52 +36,47 @@ export function Search() {
         activities: ['Wailea Beach', 'Road to Hana'],
     },]);
 
-
     const handleSearch = async (e) => {
         e.preventDefault();
-        console.log(`Temperature: ${temperature}`);
-        console.log(`Activity: ${activity}`);
-        console.log(`Travel Date: ${traveldate}`);
+
+        // Prepare the data to send
         const searchData = {
             temperature: temperature,
             activity: activity,
             traveldate: traveldate,
         };
+
         try {
             // Send a POST request to the backend using Axios
-            const response = await axios.post('http://localhost:8080/backend/api.php', searchData, {
+            const response = await axios.post('http://localhost:8080/api.php', searchData, {
                 headers: {
                     'Content-Type': 'application/json'
                 },
             });
-    
+
             const data = response.data;
-            console.log('Response from backend:', data);
-    
-            setDestinations(data);
+            console.log(data);
+
         } catch (error) {
             console.error('Error fetching data:', error);
         }
-    };
-        
-        
     }
 
-        return (
-            <div>
-                <form>
-                    <label>Search: </label>
-                    <TemperatureSearch temperature={temperature} setTemperature={setTemperature} />
-                    <Activity activity={activity} setActivity={setActivity} />
-                    <TravelDate traveldate={traveldate} setTravelDate={setTravelDate} />
-                    <button onClick={handleSearch}>Search</button>
-                </form>
-                <ul>
-                    {destinations.map((destination) => (
-                        <Destination key={destination.id} destination={destination} />
-                    ))
-                    }
-                </ul>
-            </div>
-        );
-    }
+    return (
+        <div>
+            <form>
+                <label>Search: </label>
+                <TemperatureSearch temperature={temperature} setTemperature={setTemperature} />
+                <Activity activity={activity} setActivity={setActivity} />
+                <TravelDate traveldate={traveldate} setTravelDate={setTravelDate} />
+                <button onClick={handleSearch}>Search</button>
+            </form>
+            <ul>
+                {destinations.map((destination) => (
+                    <Destination key={destination.id} destination={destination} />
+                ))
+                }
+            </ul>
+        </div>
+    );
+}
