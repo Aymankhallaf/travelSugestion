@@ -35,7 +35,7 @@ export function Search() {
         activities: ['Wailea Beach', 'Road to Hana'],
     },]);
     // Results to test API calls;
-    const [results, setResults] = useState();
+    const [results, setResults] = useState([]);
 
     const handleSearch = async (e) => {
         e.preventDefault();
