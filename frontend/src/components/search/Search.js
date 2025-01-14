@@ -3,8 +3,7 @@ import { TemperatureSearch } from './Temperature';
 import { Activity } from './Activity';
 import { TravelDate } from './TravelDate';
 import { Destination } from '../result/Destination';
-import { fetchDestinations } from '../api/activity';
-import { fetchWeather } from '../api/weather';
+
 import axios from 'axios';
 
 export function Search() {
