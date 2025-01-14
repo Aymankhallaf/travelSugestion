@@ -14,18 +14,18 @@ $dotenv->load();
 // $data = json_decode(file_get_contents('php://input'), true);
 // var_dump(value: $data);
 
+var_dump(getCityTemperature("London","2023-10-15"));
 
+// $locationData = getTripadvisorData("climbing");
+// if ($locationData !== null && !empty($locationData['data'])) {
+//     $locationId = $locationData['data'][0]['location_id']; // Get the first location's ID
+//     $photos = getTripadvisorPhotos($locationId);
 
-$locationData = getTripadvisorData("climbing");
-if ($locationData !== null && !empty($locationData['data'])) {
-    $locationId = $locationData['data'][0]['location_id']; // Get the first location's ID
-    $photos = getTripadvisorPhotos($locationId);
+//     if ($photos !== null) {
+//         $locationData['data'][0]['photos'] = $photos; // Add photos to the location data
+//     }
 
-    if ($photos !== null) {
-        $locationData['data'][0]['photos'] = $photos; // Add photos to the location data
-    }
-
-    var_dump($locationData);
-} else {
-    echo 'Failed to retrieve data.';
-}
+//     var_dump($locationData);
+// } else {
+//     echo 'Failed to retrieve data.';
+// }

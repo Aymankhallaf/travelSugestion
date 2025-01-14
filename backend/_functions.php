@@ -76,7 +76,7 @@ function getTripadvisorData(string $searchQuery, LoggerInterface $logger = null)
  * @param LoggerInterface|null $logger Optional PSR-3 logger.
  * @return array|null The decoded JSON response or null on failure.
  */
-function getTripadvisorPhotos(string $locationId, LoggerInterface $logger = null): ?array
+function getTripadvisorPhotos(string $locationId, LoggerInterface $logger = null): ?string
 {
     if (!isset($_ENV["ApiTripadvisor"]) || empty($_ENV["ApiTripadvisor"])) {
         throw new RuntimeException('Tripadvisor API key is not set in environment variables.');
@@ -116,6 +116,65 @@ function getTripadvisorPhotos(string $locationId, LoggerInterface $logger = null
         if ($logger !== null) {
             $logger->error('Runtime error: ' . $e->getMessage(), [
                 'locationId' => $locationId,
+                'exception' => $e,
+            ]);
+        }
+        return null;
+    }
+}
+
+
+/**
+ * Get the temperature forecast for a specific city and date.
+ *
+ * @param string $location The city or location name.
+ * @param string $date The date in YYYY-MM-DD format.
+ * @param LoggerInterface|null $logger Optional PSR-3 logger.
+ * @return array|null The temperature forecast or null on failure.
+ */
+function getCityTemperature(string $location, string $date, LoggerInterface $logger = null): ?array
+{
+    if (!isset($_ENV["WEATHERAPI_KEY"]) || empty($_ENV["WEATHERAPI_KEY"])) {
+        throw new RuntimeException('Visual Crossing API key is not set in environment variables.');
+    }
+
+    $client = new Client();
+    $queryParams = [
+        'key' => $_ENV["WEATHERAPI_KEY"],
+        'unitGroup' => 'metric',
+    ];
+
+    try {
+        $response = $client->request('GET', "https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/{$location}/{$date}", [
+            'headers' => [
+                'accept' => 'application/json',
+            ],
+            'query' => $queryParams,
+        ]);
+
+        $body = $response->getBody();
+        $data = json_decode($body, true);
+
+        if (json_last_error() !== JSON_ERROR_NONE) {
+            throw new RuntimeException('Failed to decode JSON response.');
+        }
+
+        return $data;
+
+    } catch (GuzzleException $e) {
+        if ($logger !== null) {
+            $logger->error('Visual Crossing request failed: ' . $e->getMessage(), [
+                'location' => $location,
+                'date' => $date,
+                'exception' => $e,
+            ]);
+        }
+        return null;
+    } catch (RuntimeException $e) {
+        if ($logger !== null) {
+            $logger->error('Runtime error: ' . $e->getMessage(), [
+                'location' => $location,
+                'date' => $date,
                 'exception' => $e,
             ]);
         }
