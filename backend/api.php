@@ -19,8 +19,29 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
 }
 
 $data = json_decode(file_get_contents('php://input'), true);
-var_dump(value: $data);
 
+// Get the raw POST data
+$data = json_decode(file_get_contents('php://input'), true);
+
+if ($data === null) {
+    http_response_code(400);
+    echo json_encode(['error' => 'Invalid JSON data']);
+    exit;
+}
+
+// Extract data from the request
+$temperature = $data['temperature'] ?? null;
+$activity = $data['activity'] ?? null;
+$traveldate = $data['traveldate'] ?? null;
+
+// Validate the data
+if (!$temperature || !$activity || !$traveldate) {
+    http_response_code(400);
+    echo json_encode(['error' => 'Missing required fields']);
+    exit;
+}
+
+var_dump($data);
 // var_dump(getCityTemperature("London", "2023-10-15"));
 
 // $locationData = getTripadvisorData("climbing");
