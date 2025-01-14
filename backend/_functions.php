@@ -163,9 +163,9 @@ function getCityWeather(string $location, string $date, LoggerInterface $logger 
 
         return [
             'date' => $forecastDay['datetime'],
-            'avg_temperature' => $forecastDay['temp'],
-            'max_temperature' => $forecastDay['tempmax'],
-            'min_temperature' => $forecastDay['tempmin'],
+            'avg' => $forecastDay['temp'],
+            'max' => $forecastDay['tempmax'],
+            'min' => $forecastDay['tempmin'],
             'conditions' => $forecastDay['conditions'],
             'wind_speed' => $forecastDay['windspeed'],
             'humidity' => $forecastDay['humidity'],
@@ -175,7 +175,7 @@ function getCityWeather(string $location, string $date, LoggerInterface $logger 
             'sunset' => $forecastDay['sunset'],
             'icon' => $forecastDay['icon'], // Weather icon
         ];
-        
+
     } catch (GuzzleException $e) {
         if ($logger !== null) {
             $logger->error('Visual Crossing request failed: ' . $e->getMessage(), [
