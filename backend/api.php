@@ -1,5 +1,6 @@
 <?php
 require __DIR__ . '/vendor/autoload.php';
+require __DIR__ . '/_functions.php';
 
 $dotenv = Dotenv\Dotenv::createImmutable(__DIR__ );
 $dotenv->load();
@@ -16,24 +17,4 @@ $dotenv->load();
 
 
 $client = new \GuzzleHttp\Client();
-
-$response = $client->request('GET', 'https://api.content.tripadvisor.com/api/v1/location/search?key='.$_ENV["ApiTripadvisor"].'&searchQuery=swimming&language=en', [
-    'headers' => [
-        'accept' => 'application/json',
-    ],
-]);
-
-echo $response->getBody();
-
-
-
-
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    echo json_encode(['message' => 'Your POST request was successful']);
-
-
-
-  
-} else {
-    echo json_encode(['message' => 'Your Post request was unsuccessful']);
-}
+var_dump(getTripadvisorData("climbing" ));
