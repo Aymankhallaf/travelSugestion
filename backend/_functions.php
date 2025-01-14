@@ -76,7 +76,7 @@ function getTripadvisorData(string $searchQuery, LoggerInterface $logger = null)
  * @param LoggerInterface|null $logger Optional PSR-3 logger.
  * @return array|null The decoded JSON response or null on failure.
  */
-function getTripadvisorPhotos(string $locationId, LoggerInterface $logger = null): ?string
+function getTripadvisorPhotos(string $locationId, LoggerInterface $logger = null): ?array
 {
     if (!isset($_ENV["ApiTripadvisor"]) || empty($_ENV["ApiTripadvisor"])) {
         throw new RuntimeException('Tripadvisor API key is not set in environment variables.');

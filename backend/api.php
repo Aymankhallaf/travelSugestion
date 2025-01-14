@@ -31,9 +31,9 @@ if ($data === null) {
 
 
 // Extract data from the request
-$activity = strip_tags($data['activity'] )?? null;
-$traveldate = strip_tags($data['traveldate']) ?? null;
-$temperature = strip_tags($data['temperature']) ?? null;
+$activity = ($data['activity'] )?? null;
+$traveldate = ($data['traveldate']) ?? null;
+$temperature = ($data['temperature']) ?? null;
 
 // Validate the data
 if (!$temperature || !$activity || !$traveldate) {
