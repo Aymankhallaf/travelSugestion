@@ -34,8 +34,8 @@ export function Search() {
         weather: 'Sunny',
         activities: ['Wailea Beach', 'Road to Hana'],
     },]);
-// Results to test API calls;
-const [result, setResult] = useState();
+    // Results to test API calls;
+    const [results, setResults] = useState();
 
     const handleSearch = async (e) => {
         e.preventDefault();
@@ -57,18 +57,15 @@ const [result, setResult] = useState();
 
             const data = response.data;
             console.log(data);
-            setResult(data);
-
+            setResults(data.results || []);
         } catch (error) {
             console.error('Error fetching data:', error);
-            setResult(error.message);
-
+            setResults([]);
         }
     }
 
     return (
         <div>
-              <div>{result}</div>      
             <form>
                 <label>Search: </label>
                 <TemperatureSearch temperature={temperature} setTemperature={setTemperature} />
@@ -76,12 +73,32 @@ const [result, setResult] = useState();
                 <TravelDate traveldate={traveldate} setTravelDate={setTravelDate} />
                 <button onClick={handleSearch}>Search</button>
             </form>
-            <ul>
-                {destinations.map((destination) => (
-                    <Destination key={destination.id} destination={destination} />
+            {results.length > 0 ? (
+                results.map((result, index) => (
+                    <div key={index} style={{ marginBottom: '20px', border: '1px solid #ccc', padding: '10px' }}>
+                        <h3>{result.city}</h3>
+                        <p><strong>Temperature:</strong> {result.temperature}°C</p>
+                        <div>
+                            <strong>Photos:</strong>
+                            {result.photos && result.photos.length > 0 ? (
+                                result.photos.map((photo, photoIndex) => (
+                                    <img
+                                        key={photoIndex}
+                                        src={photo.images.original.url}
+                                        alt={`Photo ${photoIndex + 1}`}
+                                        style={{ width: '100px', margin: '5px' }}
+                                    />
+                                ))
+                            ) : (
+                                <p>No photos available.</p>
+                            )}
+                        </div>
+                    </div>
                 ))
-                }
-            </ul>
+            ) : (
+                <p>No results found.</p>
+            )}
         </div>
+
     );
 }
