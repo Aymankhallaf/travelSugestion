@@ -159,8 +159,24 @@ function getCityTemperature(string $location, string $date, LoggerInterface $log
             throw new RuntimeException('Failed to decode JSON response.');
         }
 
-        return $data;
+        // Extract weather data for the specific date
+        foreach ($data['forecast']['forecastday'] as $forecastDay) {
+            if ($forecastDay['date'] === $date) {
+                return [
+                    'date' => $forecastDay['date'],
+                    'avg_temperature' => $forecastDay['day']['avgtemp_c'],
+                    'max_temperature' => $forecastDay['day']['maxtemp_c'],
+                    'min_temperature' => $forecastDay['day']['mintemp_c'],
+                    'conditions' => $forecastDay['day']['condition']['text'],
+                    'wind_speed' => $forecastDay['day']['maxwind_kph'],
+                    'humidity' => $forecastDay['day']['avghumidity'],
+                    'chance_of_rain' => $forecastDay['day']['daily_chance_of_rain'],
+                    'uv_index' => $forecastDay['day']['uv'],
+                ];
+            }
+        }
 
+        throw new RuntimeException("No forecast data found for the date: $date.");
     } catch (GuzzleException $e) {
         if ($logger !== null) {
             $logger->error('Visual Crossing request failed: ' . $e->getMessage(), [
