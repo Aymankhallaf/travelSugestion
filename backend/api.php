@@ -2,7 +2,7 @@
 require __DIR__ . '/vendor/autoload.php';
 require __DIR__ . '/_functions.php';
 
-$dotenv = Dotenv\Dotenv::createImmutable(__DIR__ );
+$dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
 $dotenv->load();
 // header('Content-type: application/json');
 
@@ -16,4 +16,16 @@ $dotenv->load();
 
 
 
-var_dump(getTripadvisorData("climbing" ));
+$locationData = getTripadvisorData("climbing");
+if ($locationData !== null && !empty($locationData['data'])) {
+    $locationId = $locationData['data'][0]['location_id']; // Get the first location's ID
+    $photos = getTripadvisorPhotos($locationId);
+
+    if ($photos !== null) {
+        $locationData['data'][0]['photos'] = $photos; // Add photos to the location data
+    }
+
+    var_dump($locationData);
+} else {
+    echo 'Failed to retrieve data.';
+}
