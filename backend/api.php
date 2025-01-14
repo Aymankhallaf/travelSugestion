@@ -16,5 +16,4 @@ $dotenv->load();
 
 
 
-$client = new \GuzzleHttp\Client();
 var_dump(getTripadvisorData("climbing" ));
