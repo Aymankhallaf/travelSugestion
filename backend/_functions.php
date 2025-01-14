@@ -181,3 +181,28 @@ function getCityTemperature(string $location, string $date, LoggerInterface $log
         return null;
     }
 }
+
+
+
+/**
+ * purify data by removing strip tags for data and if 
+ * the input data have a article paragraph he will allow some
+ * html character look at config of this function (purifierHtmlText())
+ * @param array $inputData the data input
+ * @return void
+ */
+function purifyData(array $inputData): void
+{
+    foreach ($inputData as $key => &$value) {
+        if (is_int($value)) {
+            intval($value);
+        } elseif (is_null($value)) {
+            $value = null;
+        } elseif (is_array($value)) {
+            purifyData($value);
+        } else {
+            // Strip all tags and escape for other fields
+            $value = htmlspecialchars(strip_tags($value));
+        }
+    }
+}
