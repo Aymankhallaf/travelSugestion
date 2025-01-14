@@ -65,44 +65,26 @@ export function Search() {
     }
 
     return (
+        <div>
+            <form>
+                <label>Search: </label>
+                <TemperatureSearch temperature={temperature} setTemperature={setTemperature} />
+                <Activity activity={activity} setActivity={setActivity} />
+                <TravelDate traveldate={traveldate} setTravelDate={setTravelDate} />
+                <button onClick={handleSearch}>Search</button>
+            </form>
+
             <div>
-                <form>
-                    <label>Search: </label>
-                    <TemperatureSearch temperature={temperature} setTemperature={setTemperature} />
-                    <Activity activity={activity} setActivity={setActivity} />
-                    <TravelDate traveldate={traveldate} setTravelDate={setTravelDate} />
-                    <button onClick={handleSearch}>Search</button>
-                </form>
-    
-                <div>
-                    <h2>Results</h2>
-                    {Array.isArray(results) && results.length > 0 ? (
-                        results.map((result, index) => (
-                            <div key={index} style={{ marginBottom: '20px', border: '1px solid #ccc', padding: '10px' }}>
-                                <h3>{result.city}</h3>
-                                <p><strong>Temperature:</strong> {result.temperature}°C</p>
-                                <div>
-                                    <strong>Photos:</strong>
-                                    {result.photos && result.photos.data && result.photos.data.length > 0 ? (
-                                        result.photos.data.map((photo, photoIndex) => (
-                                            <img
-                                                key={photoIndex}
-                                                src={photo.images.original.url}
-                                                alt={`Photo ${photoIndex + 1}`}
-                                                style={{ width: '100px', margin: '5px' }}
-                                            />
-                                        ))
-                                    ) : (
-                                        <p>No photos available.</p>
-                                    )}
-                                </div>
-                            </div>
-                        ))
-                    ) : (
-                        <p>No results found.</p>
-                    )}
-                </div>
+                <h2>Results</h2>
+                {Array.isArray(results) && results.length > 0 ? (
+                    results.map((result, index) => (
+                        <Destination key={index} destination={result} />
+                    ))
+                ) : (
+                    <p>No results found.</p>
+                )}
             </div>
+        </div>
 
     );
 }
