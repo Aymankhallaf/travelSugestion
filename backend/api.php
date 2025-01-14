@@ -31,9 +31,9 @@ if ($data === null) {
 
 
 // Extract data from the request
-$temperature = strip_tags($data['temperature']) ?? null;
 $activity = strip_tags($data['activity'] )?? null;
 $traveldate = strip_tags($data['traveldate']) ?? null;
+$temperature = strip_tags($data['temperature']) ?? null;
 
 // Validate the data
 if (!$temperature || !$activity || !$traveldate) {
@@ -42,19 +42,39 @@ if (!$temperature || !$activity || !$traveldate) {
     exit;
 }
 
-var_dump($data);
-// var_dump(getCityTemperature("London", "2023-10-15"));
 
-// $locationData = getTripadvisorData("climbing");
-// if ($locationData !== null && !empty($locationData['data'])) {
-//     $locationId = $locationData['data'][0]['location_id']; // Get the first location's ID
-//     $photos = getTripadvisorPhotos($locationId);
+try {
+    // Step 1: Fetch city names based on the activity
+    $locationData = getTripadvisorData($activity);
+    if ($locationData === null || empty($locationData['data'])) {
+        throw new RuntimeException('No locations found for the activity.');
+    }
 
-//     if ($photos !== null) {
-//         $locationData['data'][0]['photos'] = $photos; // Add photos to the location data
-//     }
+    $results = [];
+    foreach ($locationData['data'] as $location) {
+        $city = $location['name'];
+        $locationId = $location['location_id'];
 
-//     var_dump($locationData);
-// } else {
-//     echo 'Failed to retrieve data.';
-// }
+        // Step 2: Fetch photos for the city using the location ID
+        $photos = getTripadvisorPhotos($locationId);
+
+        // Step 3: Fetch temperature for the city
+        $temperature = getCityTemperature($city, date('Y-m-d')); // Use current date or dynamic date
+
+        // Add the result for this city
+        $results[] = [
+            'city' => $city,
+            'photos' => $photos,
+            'temperature' => $temperature,
+        ];
+    }
+
+    // Return the results
+    echo json_encode([
+        'status' => 'success',
+        'results' => $results,
+    ]);
+} catch (Exception $e) {
+    http_response_code(500);
+    echo json_encode(['error' => $e->getMessage()]);
+}
