@@ -41,22 +41,28 @@ export function Search() {
         console.log(`Temperature: ${temperature}`);
         console.log(`Activity: ${activity}`);
         console.log(`Travel Date: ${traveldate}`);
+        const searchData = {
+            temperature: temperature,
+            activity: activity,
+            traveldate: traveldate,
+        };
         try {
-            const destinations2 = await fetchDestinations(activity);
-            console.log(destinations2);
-        }
-        catch(error) {
-            console.error('Error fetching destinations:', error);
-
-        }; 
-        // try {
-        //         const weather = await fetchWeather("paris", '2025-01-10');
-        //         console.log(weather);
-        //     }
-        //     catch(error) {
-        //         console.error('Error fetching weather:', error);
+            // Send a POST request to the backend using Axios
+            const response = await axios.post('http://localhost:8080/backend/api.php', searchData, {
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+            });
     
-        //     }; 
+            const data = response.data;
+            console.log('Response from backend:', data);
+    
+            setDestinations(data);
+        } catch (error) {
+            console.error('Error fetching data:', error);
+        }
+    };
+        
         
     }
 
