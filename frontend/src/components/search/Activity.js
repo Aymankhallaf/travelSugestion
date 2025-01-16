@@ -6,7 +6,7 @@ export function Activity({activity, setActivity}) {
     return (
 
            <div>
-        <label>Activity: </label>
+        <label className="bg-blue">Activity: </label>
         <select value={activity} onChange={(e) => {
              setActivity(e.target.value);}
             }>

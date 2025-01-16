@@ -25,7 +25,7 @@ export function Destination({ destination }) {
                         <img
                             key={index}
                             src={photo.images.original.url}
-                            alt={`Photo ${index + 1}`}
+                            alt={`${index + 1}`}
                             style={{ width: '100px', margin: '5px' }}
                         />
                     ))

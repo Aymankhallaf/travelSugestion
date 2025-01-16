@@ -67,7 +67,7 @@ export function Search() {
     return (
         <div>
             <form>
-                <label>Search: </label>
+                <label className='text-red-950'>Search: </label>
                 <TemperatureSearch temperature={temperature} setTemperature={setTemperature} />
                 <Activity activity={activity} setActivity={setActivity} />
                 <TravelDate traveldate={traveldate} setTravelDate={setTravelDate} />
