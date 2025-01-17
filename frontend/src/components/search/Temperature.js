@@ -6,7 +6,7 @@ export function TemperatureSearch({ temperature, setTemperature }) {
 
 
 
-  return (<div>
+  return (<div className='flex-1'>
     <label>Preferred Temperature (°C): </label>
     <input
       type="number"

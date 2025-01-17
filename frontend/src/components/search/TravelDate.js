@@ -5,7 +5,7 @@ export function TravelDate({ travelDate, setTravelDate }) {
 
 
     return (
-        <div>
+        <div className='flex-1'>
             <label htmlFor="travel-date">Select Travel Date: </label>
             <input
                 type="date"
