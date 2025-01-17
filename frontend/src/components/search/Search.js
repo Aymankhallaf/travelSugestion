@@ -66,14 +66,15 @@ export function Search() {
 
     return (
         <div>
+            <div className="bg-[url('../../../public/img/bg-search.webp')] h-screen bg-cover bg-center bg-no-repeat">
             <h2 className='text-red-950'>Search: </h2>
-            <form className='flex flex-col md:flex-row gap-4'>
-                <TemperatureSearch temperature={temperature} setTemperature={setTemperature} />
-                <Activity activity={activity} setActivity={setActivity} />
-                <TravelDate traveldate={traveldate} setTravelDate={setTravelDate} />
-                <button onClick={handleSearch}>Search</button>
-            </form>
-
+                <form className='flex flex-col md:flex-row gap-4'>
+                    <TemperatureSearch temperature={temperature} setTemperature={setTemperature} />
+                    <Activity activity={activity} setActivity={setActivity} />
+                    <TravelDate traveldate={traveldate} setTravelDate={setTravelDate} />
+                    <button onClick={handleSearch}>Search</button>
+                </form>
+            </div>
             <div>
                 <h2 className='bg-black'>Results</h2>
                 {Array.isArray(results) && results.length > 0 ? (
