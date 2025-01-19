@@ -66,14 +66,13 @@ export function Search() {
 
     return (
         <div>
-            <div
-                className="bg-teal-400 h-screen bg-cover bg-center bg-no-repeat">
+            <div className="bg-teal-400 h-screen">
                 <h2 className='text-red-950'>Search: </h2>
-                <form className='flex flex-col md:flex-row gap-4'>
+                <form className='flex flex-col md:flex-row gap-1'>
                     <TemperatureSearch temperature={temperature} setTemperature={setTemperature} />
                     <Activity activity={activity} setActivity={setActivity} />
                     <TravelDate traveldate={traveldate} setTravelDate={setTravelDate} />
-                    <button className='flex-1' onClick={handleSearch}>Search</button>
+                    <button className='flex-1' onClick={handleSearch}>Go</button>
                 </form>
             </div>
             <div>
