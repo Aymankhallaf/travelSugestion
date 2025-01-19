@@ -66,8 +66,9 @@ export function Search() {
 
     return (
         <div>
-            <div className="bg-[url('../../../public/img/bg-search.webp')] h-screen bg-cover bg-center bg-no-repeat">
-            <h2 className='text-red-950'>Search: </h2>
+            <div
+                className="bg-teal-400 h-screen bg-cover bg-center bg-no-repeat">
+                <h2 className='text-red-950'>Search: </h2>
                 <form className='flex flex-col md:flex-row gap-4'>
                     <TemperatureSearch temperature={temperature} setTemperature={setTemperature} />
                     <Activity activity={activity} setActivity={setActivity} />
