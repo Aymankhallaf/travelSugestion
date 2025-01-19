@@ -3,8 +3,8 @@ import { TemperatureSearch } from './Temperature';
 import { Activity } from './Activity';
 import { TravelDate } from './TravelDate';
 import { Destination } from '../result/Destination';
-
 import axios from 'axios';
+
 
 export function Search() {
     const [temperature, setTemperature] = useState(25);

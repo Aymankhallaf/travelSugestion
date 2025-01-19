@@ -1,4 +1,5 @@
 import React from 'react';
+import { FaCalendarAlt } from 'react-icons/fa';
 
 
 export function TravelDate({ travelDate, setTravelDate }) {
@@ -6,6 +7,7 @@ export function TravelDate({ travelDate, setTravelDate }) {
 
     return (
         <div className='flex-1 block overflow-hidden bg-white border-gray-200 rounded-lg	px-3 py-2 shadow-sm focus-within:border-blue-600 focus-within:ring-1 focus-within:ring-blue-600'>
+            <FaCalendarAlt />
             <label htmlFor="travel-date">Select Travel Date: </label>
             <input
                 className='mt-1 w-full border-none p-0'
