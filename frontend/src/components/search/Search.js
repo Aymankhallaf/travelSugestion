@@ -68,7 +68,7 @@ export function Search() {
         <div>
             <div className="bg-teal-400 h-screen">
                 <h2 className='text-red-950'>Search: </h2>
-                <form className='flex flex-col md:flex-row gap-1'>
+                <form className='flex flex-col md:flex-row'>
                     <TemperatureSearch temperature={temperature} setTemperature={setTemperature} />
                     <Activity activity={activity} setActivity={setActivity} />
                     <TravelDate traveldate={traveldate} setTravelDate={setTravelDate} />
