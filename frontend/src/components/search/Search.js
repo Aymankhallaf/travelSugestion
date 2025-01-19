@@ -73,7 +73,7 @@ export function Search() {
                     <TemperatureSearch temperature={temperature} setTemperature={setTemperature} />
                     <Activity activity={activity} setActivity={setActivity} />
                     <TravelDate traveldate={traveldate} setTravelDate={setTravelDate} />
-                    <button onClick={handleSearch}>Search</button>
+                    <button className='flex-1' onClick={handleSearch}>Search</button>
                 </form>
             </div>
             <div>
