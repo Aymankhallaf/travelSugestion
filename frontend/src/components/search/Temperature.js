@@ -8,11 +8,14 @@ export function TemperatureSearch({ temperature, setTemperature }) {
 
 
   return (
-    <div className='flex-1 block overflow-hidden bg-white border-gray-200 rounded-lg	px-3 py-2 shadow-sm focus-within:border-blue-600 focus-within:ring-1 focus-within:ring-blue-600'>
-      <label className=''>Preferred Temperature (°C): </label>
-      <FaTemperatureHalf />
+    <div className="flex-1 relative">
+      <label htmlFor="temperature" className="sr-only">
+        Preferred Temperature (°C):
+      </label>
+      <FaTemperatureHalf className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
       <input
-        className='mt-1 w-full border-none p-0'
+        id='temperature'
+        className="mt-1 block w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200"
         type="number"
         value={temperature}
         onChange={(e) => {

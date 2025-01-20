@@ -7,7 +7,7 @@ export function Activity({ activity, setActivity }) {
     return (
 
         <div className="flex-1 relative">
-            <label chtmlFor="travel-date" className="sr-only">Activity</label>
+            <label chtmlFor="activity" className="sr-only">Activity</label>
             <div className="relative">
                 <FaRunning className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
 
