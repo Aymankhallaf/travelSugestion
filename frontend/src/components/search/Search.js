@@ -3,6 +3,8 @@ import { TemperatureSearch } from './Temperature';
 import { Activity } from './Activity';
 import { TravelDate } from './TravelDate';
 import { Destination } from '../result/Destination';
+import { FaSearch } from 'react-icons/fa';
+
 import axios from 'axios';
 
 
@@ -74,7 +76,9 @@ export function Search() {
                     <TravelDate traveldate={traveldate} setTravelDate={setTravelDate} />
                     <button
                         className='w-30 px-4 py-2 bg-teal-600 text-white rounded-lg shadow-sm hover:bg-teal-700 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:ring-opacity-50'
-                        onClick={handleSearch}>Go</button>
+                        onClick={handleSearch}>
+                        <FaSearch />
+                        Go</button>
                 </form>
             </div>
             <div>
