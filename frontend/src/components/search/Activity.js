@@ -6,17 +6,17 @@ export function Activity({ activity, setActivity }) {
 
     return (
 
-        <div className='flex-1 block overflow-hidden bg-white border-gray-200 rounded-lg	px-3 py-2 shadow-sm focus-within:border-blue-600 focus-within:ring-1 focus-within:ring-blue-600'>
-            <FaHiking className="absolute" />
-            <label className="relative">Activity: </label>
+        <div className="flex-1 relative">
+            <label chtmlFor="travel-date" className="sr-only">Activity</label>
             <select
-                className='mt-1 w-full border-none p-0'
-                value={activity} onChange={(e) => {
-                    setActivity(e.target.value);
-                }
-                }>
+                id="activity"
+                className="mt-1 block w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200"
+                value={activity}
+                onChange={(e) => setActivity(e.target.value)}
+                aria-label="Select activity"
+            >
                 <option value="beach">Beach</option>
-                <option value="beach">Family & friends</option>
+                <option value="family">Family & Friends</option>
                 <option value="hiking">Hiking</option>
                 <option value="skiing">Skiing</option>
                 <option value="cultural">Cultural Tours</option>
