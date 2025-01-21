@@ -74,11 +74,18 @@ export function Search() {
                     <TemperatureSearch temperature={temperature} setTemperature={setTemperature} />
                     <Activity activity={activity} setActivity={setActivity} />
                     <TravelDate traveldate={traveldate} setTravelDate={setTravelDate} />
-                    <button
-                        className='w-30 px-4 py-2 bg-teal-600 text-white rounded-lg shadow-sm hover:bg-teal-700 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:ring-opacity-50'
-                        onClick={handleSearch}>
-                        <FaSearch />
-                        Go</button>
+                    <div className="relative">
+                        <div className="relative">
+                            <FaSearch className="absolute left-3 top-1/2 transform -translate-y-1/2 text-white" />
+                            <button  
+                                type="submit"
+                                className="mt-1 block w-full pl-10 pr-4 py-3 bg-teal-600 text-white rounded-lg shadow-sm hover:bg-teal-700 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200"
+                                aria-label="Search"
+                            >
+                                Search
+                            </button>
+                        </div>
+                    </div>
                 </form>
             </div>
             <div>
