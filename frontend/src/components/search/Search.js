@@ -69,11 +69,12 @@ export function Search() {
     return (
         <div className=''>
             <div
-                style={{ backgroundImage: `url(${SearchBg})` }}
-                className="bg-cover bg-center h-screen bg-no-repeat bg-black-300">
-                <div className='w-full max-w-4xl mx-auto '>
-                    <h2 className='text-red-950'>La Beauté du Monde à Portée de Clic – Inspirez Vos Voyages!</h2>
-                    <p>Notre site vous emmène à la découverte des plus beaux lieux de la planète. Que vous rêviez de paysages époustouflants, de cultures fascinantes ou de destinations insolites, trouvez l'inspiration pour vos voyages. Explorez le monde et préparez des souvenirs inoubliables.</p>
+                style={{ backgroundColor: 'rgba(0, 0, 0.5)', 
+                    backgroundImage: `url(${SearchBg})` }}
+                className="bg-gray-600 bg-cover bg-center h-screen bg-no-repeat">
+                <div className='w-full max-w-4xl mx-auto flex flex-col gap-10'>
+                    <h2 className='mt-20 text-4xl font-bold font-sans text-white'>La Beauté du Monde à Portée de Clic – Inspirez Vos Voyages!</h2>
+                    <p className='text-white'>Notre site vous emmène à la découverte des plus beaux lieux de la planète. Que vous rêviez de paysages époustouflants, de cultures fascinantes ou de destinations insolites, trouvez l'inspiration pour vos voyages. Explorez le monde et préparez des souvenirs inoubliables.</p>
                     <form className='flex flex-col md:flex-row gap-2'>
                         <TemperatureSearch temperature={temperature} setTemperature={setTemperature} />
                         <Activity activity={activity} setActivity={setActivity} />
