@@ -13,7 +13,7 @@ export function Activity({ activity, setActivity }) {
 
                 <select
                     id="activity"
-                    className="mt-1 block w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200"
+                    className="mt-1 block w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-teal-500 focus:border-teal-500 transition-all duration-200"
                     value={activity}
                     onChange={(e) => setActivity(e.target.value)}
                     aria-label="Select activity"
