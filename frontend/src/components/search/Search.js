@@ -6,6 +6,7 @@ import { Destination } from '../result/Destination';
 import { FaSearch } from 'react-icons/fa';
 import SearchBg from '../../assets/img//bg-search.webp'
 import axios from 'axios';
+import Header from './header';
 
 
 export function Search() {
@@ -48,6 +49,7 @@ export function Search() {
 
     return (
         <div className=''>
+            <Header />
             <div
                 style={{
                     backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(${SearchBg})`,
