@@ -3,10 +3,10 @@ import {Search} from './components/search/Search';
 
 function App() {
   return (
-    <div className="App">
+    <main className="App">
       <Search />
 
-    </div>
+    </main>
   );
 }
 
