@@ -29,20 +29,20 @@ export function Destination({ destination }) {
                     ) : (
                         <p>No photos available.</p>
                     )}             </div>
-                <div class="p-4">
-                    <div class="flex flex-col justify-items-start mb-2">
-                        <h3 class="text-slate-800 text-xl font-semibold text-nowrap mb-2">
+                <div className="p-4">
+                    <div className="flex flex-col justify-items-start mb-2">
+                        <h3 className="text-slate-800 text-xl font-semibold text-nowrap mb-2">
                             {city}
 
                         </h3>
 
-                        <div class="flex gap-2 items-center">
+                        <div className="flex gap-2 items-center">
                             <FaTemperatureHalf />
-                            <span class="text-slate-600 ml-2">{currentTemp}°C (Min: {minTemp}°C, Max: {maxTemp}°C)°C</span>
+                            <span className="text-slate-600 ml-2">{currentTemp}°C (Min: {minTemp}°C, Max: {maxTemp}°C)°C</span>
                         </div>
                     </div>
 
-                    <p class="text-slate-600 leading-normal font-light">
+                    <p className="text-slate-600 leading-normal font-light">
                     </p>
                 </div>
 
