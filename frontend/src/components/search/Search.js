@@ -44,7 +44,7 @@ export function Search() {
         } finally {
             setIsLoading(false);
         }
-    }
+    };
 
     return (
         <div className=''>
@@ -70,7 +70,7 @@ export function Search() {
                                     className="mt-1 block w-full pl-10 pr-4 py-3 bg-teal-600 text-white rounded-lg shadow-sm hover:bg-teal-700 focus:ring-2 transition-all duration-200"
                                     aria-label="Search"
                                 >
-                                    Search
+                                    {isLoading ? "Searching..." : "Search"}
                                 </button>
                             </div>
                         </div>
