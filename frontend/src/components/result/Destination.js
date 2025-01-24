@@ -16,26 +16,7 @@ export function Destination({ destination }) {
     const maxTemp = temperature?.max || 'N/A';
 
     return (
-        // <div style={{ marginBottom: '20px', border: '1px solid #ccc', padding: '10px' }}>
-        //     <h3>{city}</h3>
-        //     <p><strong>Temperature:</strong> {currentTemp}°C (Min: {minTemp}°C, Max: {maxTemp}°C)</p>
-        //     <div>
-        //         <strong>Photos:</strong>
-        //         {photos && photos.data && photos.data.length > 0 ? (
-        //             photos.data.map((photo, index) => (
-        //                 <img
-        //                     key={index}
-        //                     src={photo.images.original.url}
-        //                     alt={`${index + 1}`}
-        //                     style={{ width: '100px', margin: '5px' }}
-        //                 />
-        //             ))
-        //         ) : (
-        //             <p>No photos available.</p>
-        //         )}
-        //     </div>
-        // </div>
-        <li key={destination.id}>
+              <li key={destination.id}>
             <div class="relative flex flex-col my-6 bg-white shadow-sm border border-slate-200 rounded-lg w-96">
                 <div class="relative h-56 m-2.5 overflow-hidden text-white rounded-md">
                     {photos && photos.data && photos.data.length > 0 ? (
