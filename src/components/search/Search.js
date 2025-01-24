@@ -10,30 +10,7 @@ export function Search() {
     const [temperature, setTemperature] = useState(25);
     const [activity, setActivity] = useState("beach");
     const [traveldate, setTravelDate] = useState();
-    const [destinations, setDestinations] = useState([{
-        id: 1,
-        name: 'Phuket',
-        country: 'Thailand',
-        temperature: 27,
-        weather: 'Sunny',
-        activities: ['Patong Beach', 'Phi Phi Islands'],
-    },
-    {
-        id: 2,
-        name: 'Canary Islands',
-        country: 'Spain',
-        temperature: 22,
-        weather: 'Partly Cloudy',
-        activities: ['Playa de las Canteras', 'Maspalomas Dunes'],
-    },
-    {
-        id: 3,
-        name: 'Maui',
-        country: 'Hawaii',
-        temperature: 25,
-        weather: 'Sunny',
-        activities: ['Wailea Beach', 'Road to Hana'],
-    },]);
+    const [destinations, setDestinations] = useState([]);
 
 
     const handleSearch = async (e) => {
@@ -49,14 +26,7 @@ export function Search() {
             console.error('Error fetching destinations:', error);
 
         }; 
-        // try {
-        //         const weather = await fetchWeather("paris", '2025-01-10');
-        //         console.log(weather);
-        //     }
-        //     catch(error) {
-        //         console.error('Error fetching weather:', error);
-    
-        //     }; 
+       
         
     }
 
