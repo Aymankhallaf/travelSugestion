@@ -21,16 +21,16 @@ export function Search() {
     const [token, setToken] = useState('');
 
     // Fetch the token from the backend
-    const fetchToken = async () => {
-        try {
-            const response = await axios.get('http://localhost:8080/backend/startSession.php');
-            console.log(response.data);
-        } catch (error) {
-            console.error('Error fetching data:', error);
-
-        }
-    };
     useEffect(() => {
+        const fetchToken = async () => {
+            try {
+                const response = await axios.get('http://localhost:8080/backend/startSession.php');
+                console.log(response.data);
+            } catch (error) {
+                console.error('Error fetching data:', error);
+    
+            }
+        };
         fetchToken(); }, []);
         
         const handleSearch = async (e) => {
