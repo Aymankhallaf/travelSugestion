@@ -1,6 +1,9 @@
 <?php
 require __DIR__ . '/vendor/autoload.php';
 require __DIR__ . '/includes/_functions.php';
+require __DIR__ . '/includes/_config.php';
+session_start();
+
 
 $dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
 $dotenv->load();
@@ -10,10 +13,11 @@ header('Content-type: application/json');
 header("Access-Control-Allow-Origin: *");
 header("Access-Control-Allow-Methods: POST, OPTIONS"); // Allow POST requests
 header("Access-Control-Allow-Headers: Content-Type"); // Allow JSON content type
+header("Access-Control-Allow-Credentials: true"); 
 
 
-
-
+var_dump( session_id());
+var_dump($_SESSION);
 // $temperature = getCityWeather("paris", date: '2025-02-01'); // Use current date or dynamic date
 
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
@@ -32,16 +36,17 @@ if ($data === null) {
     exit;
 }
 
+
 // csfr 
-if (!isServerOk()) {
-    echo json_encode(['error' => 'Server error']);
+if (!isServerOk($globalUrl)) {
+    echo json_encode(['error' => 'Server error 1']);
     exit; 
 }
 
-if (!isTokenOk($data['token'])) {
-    echo json_encode(['error' => 'server error']);
-    exit;
-}
+// if (!isTokenOk($data['token'])) {
+//     echo json_encode(['error' => 'server error  2']);
+//     exit;
+// }
 
 echo json_encode(['success' => 'Server is ok']);
 
