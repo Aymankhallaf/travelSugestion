@@ -1,6 +1,6 @@
 # Composer dependencies
 /backend/vendor/
-/docker/
+docker/
 # Node.js dependencies
 /frontend/node_modules/
 
