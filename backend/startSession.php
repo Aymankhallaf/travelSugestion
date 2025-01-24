@@ -1,7 +1,8 @@
 <?php
 require __DIR__ . '/includes/_functions.php';
+require __DIR__ . '/includes/config.php';
 // Allow requests from your React app's origin
-header("Access-Control-Allow-Origin: http://localhost:3000");
+header("Access-Control-Allow-Origin: $globalUrl");
 
 
 
