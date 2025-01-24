@@ -6,7 +6,8 @@ import { Destination } from '../result/Destination';
 import { FaSearch } from 'react-icons/fa';
 import SearchBg from '../../assets/img//bg-search.webp'
 import axios from 'axios';
-import Header from './header';
+import { Header } from './Header'; 
+
 
 
 export function Search() {
