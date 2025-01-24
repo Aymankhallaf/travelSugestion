@@ -254,12 +254,12 @@ function isTokenOk(string $token): bool
 
 /**
  * Check fo referer
- *
+ * @param string $globalUrl the global url
  * @return boolean Is the current referer valid ?
  */
-function isServerOk(): bool
+function isServerOk(string $globalUrl): bool
 {
-    global $globalUrl;
+    
     return isset($_SERVER['HTTP_REFERER'])
         && str_contains($_SERVER['HTTP_REFERER'], $globalUrl);
 }

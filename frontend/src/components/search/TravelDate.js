@@ -5,7 +5,7 @@ import { FaCalendarAlt } from 'react-icons/fa';
 export function TravelDate({ travelDate, setTravelDate }) {
 
 
-    return (
+    return ( 
         <div className="flex-1 relative">
             <label htmlFor="travel-date" className="sr-only">
                 Travel Date
