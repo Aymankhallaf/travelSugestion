@@ -16,11 +16,12 @@ export function Destination({ destination }) {
     const maxTemp = temperature?.max || 'N/A';
 
     return (
-              <li key={destination.id}>
-            <div class="relative flex flex-col my-6 bg-white shadow-sm border border-slate-200 rounded-lg w-96">
-                <div class="relative h-56 m-2.5 overflow-hidden text-white rounded-md">
+        <li key={destination.id}>
+            <div className="relative flex flex-col my-6 bg-white shadow-sm border border-slate-200 rounded-lg w-96">
+                <div className="relative h-56 m-2.5 overflow-hidden text-white rounded-md">
                     {photos && photos.data && photos.data.length > 0 ? (
                         <img
+                            className='object-cover w-full h-full'
                             key={0}
                             src={photos.data[0].images.original.url}
                             alt="1"
@@ -29,14 +30,15 @@ export function Destination({ destination }) {
                         <p>No photos available.</p>
                     )}             </div>
                 <div class="p-4">
-                    <div class="flex items-center mb-2">
-                        <h3 class="text-slate-800 text-xl font-semibold">
+                    <div class="flex flex-col justify-items-start mb-2">
+                        <h3 class="text-slate-800 text-xl font-semibold text-nowrap mb-2">
                             {city}
+
                         </h3>
 
-                        <div class="flex items-center gap-0 5 ml-auto">
+                        <div class="flex gap-2 items-center">
                             <FaTemperatureHalf />
-                            <span class="text-slate-600 ml-1.5">{currentTemp}°C (Min: {minTemp}°C, Max: {maxTemp}°C)°C</span>
+                            <span class="text-slate-600 ml-2">{currentTemp}°C (Min: {minTemp}°C, Max: {maxTemp}°C)°C</span>
                         </div>
                     </div>
 
