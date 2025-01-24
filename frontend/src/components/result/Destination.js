@@ -35,7 +35,7 @@ export function Destination({ destination }) {
         //         )}
         //     </div>
         // </div>
-        <li key={destination.id}>
+        <li className='list-style-type: none' key={destination.id}>
             <div class="relative flex flex-col my-6 bg-white shadow-sm border border-slate-200 rounded-lg w-96">
                 <div class="relative h-56 m-2.5 overflow-hidden text-white rounded-md">
                     {photos && photos.data && photos.data.length > 0 ? (
@@ -43,7 +43,6 @@ export function Destination({ destination }) {
                             key={0}
                             src={photos.data[0].images.original.url}
                             alt="1"
-                            style={{ width: '100px', margin: '5px' }}
                         />
                     ) : (
                         <p>No photos available.</p>
@@ -61,7 +60,6 @@ export function Destination({ destination }) {
                     </div>
 
                     <p class="text-slate-600 leading-normal font-light">
-                        Enter a freshly updated and thoughtfully furnished peaceful home surrounded by ancient trees, stone walls, and open meadows.
                     </p>
                 </div>
 
