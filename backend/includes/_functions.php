@@ -5,7 +5,6 @@ use GuzzleHttp\Exception\GuzzleException;
 //LoggerInterface is a standardized way to handle logging in PHP.
 use Psr\Log\LoggerInterface;
 
-
 /**
  * Get data from the Tripadvisor API.
  *
@@ -220,4 +219,47 @@ function purifyData(array $inputData): void
             $value = htmlspecialchars(strip_tags($value));
         }
     }
+}
+
+/**
+ * Generate a unique token and add it to the user session. 
+ *
+ * @return void
+ */
+function generateToken(): void
+{
+    if (
+        !isset($_SESSION['token'])
+        || !isset($_SESSION['tokenExpire'])
+        || $_SESSION['tokenExpire'] < time()
+    ) {
+        $_SESSION['token'] = md5(uniqid(mt_rand(), true));
+        $_SESSION['tokenExpire'] = time() + 60 * 15;
+    }
+}
+
+/**
+ * Check for CSRF token
+ *
+ * @param string $token token
+ * @return boolean Is there a valid token in user session ?
+ */
+function isTokenOk(string $token): bool
+{
+    return isset($_SESSION['token'])
+        && isset($token)
+        && $_SESSION['token'] === $token;
+}
+
+
+/**
+ * Check fo referer
+ *
+ * @return boolean Is the current referer valid ?
+ */
+function isServerOk(): bool
+{
+    global $globalUrl;
+    return isset($_SERVER['HTTP_REFERER'])
+        && str_contains($_SERVER['HTTP_REFERER'], $globalUrl);
 }
