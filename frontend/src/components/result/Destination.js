@@ -35,7 +35,7 @@ export function Destination({ destination }) {
         //         )}
         //     </div>
         // </div>
-        <li className='list-style-type: none' key={destination.id}>
+        <li key={destination.id}>
             <div class="relative flex flex-col my-6 bg-white shadow-sm border border-slate-200 rounded-lg w-96">
                 <div class="relative h-56 m-2.5 overflow-hidden text-white rounded-md">
                     {photos && photos.data && photos.data.length > 0 ? (

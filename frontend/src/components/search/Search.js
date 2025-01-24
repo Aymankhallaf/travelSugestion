@@ -96,8 +96,8 @@ export function Search() {
                     </form>
                 </div>
             </div>
-            <div>
                 <h2 className='bg-black'>Results</h2>
+            <ul className='flex flex-wrap gap-5 justify-center list-style-type: none'>
                 {Array.isArray(results) && results.length > 0 ? (
                     results.map((result, index) => (
                         <Destination key={index} destination={result} />
@@ -105,7 +105,7 @@ export function Search() {
                 ) : (
                     <p>No results found.</p>
                 )}
-            </div>
+            </ul>
         </div>
 
     );
