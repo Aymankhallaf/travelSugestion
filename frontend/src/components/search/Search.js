@@ -14,10 +14,12 @@ export function Search() {
     const [traveldate, setTravelDate] = useState();
     // Results to test API calls;
     const [results, setResults] = useState([]);
+    // track loading state(to disable/enable search button)
+    const [isLoading, setIsLoading] = useState(false);
 
     const handleSearch = async (e) => {
         e.preventDefault();
-
+        setIsLoading(true);
         // Prepare the data to send
         const searchData = {
             temperature: temperature,
@@ -39,6 +41,8 @@ export function Search() {
         } catch (error) {
             console.error('Error fetching data:', error);
             setResults([]);
+        } finally {
+            setIsLoading(false);
         }
     }
 
@@ -61,6 +65,7 @@ export function Search() {
                                 <FaSearch className="absolute left-3 top-1/2 transform -translate-y-1/2 text-white" />
                                 <button
                                     onClick={handleSearch}
+                                    disabled={isLoading}
                                     type="submit"
                                     className="mt-1 block w-full pl-10 pr-4 py-3 bg-teal-600 text-white rounded-lg shadow-sm hover:bg-teal-700 focus:ring-2 transition-all duration-200"
                                     aria-label="Search"
@@ -72,7 +77,7 @@ export function Search() {
                     </form>
                 </div>
             </div>
-                <h2 className='bg-black'>Results</h2>
+            <h2 className='bg-black'>Results</h2>
             <ul className='flex flex-wrap gap-5 justify-center list-style-type: none'>
                 {Array.isArray(results) && results.length > 0 ? (
                     results.map((result, index) => (
