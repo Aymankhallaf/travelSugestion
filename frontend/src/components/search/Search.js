@@ -25,7 +25,7 @@ export function Search() {
         const fetchToken = async () => {
             try {
                 const response = await axios.get('http://localhost:8080/backend/startSession.php');
-                console.log(response.data);
+                setToken(response.data);
             } catch (error) {
                 console.error('Error fetching data:', error);
     
@@ -41,6 +41,7 @@ export function Search() {
                 temperature: temperature,
                 activity: activity,
                 traveldate: traveldate,
+                token: token,
             };
 
             try {
@@ -74,6 +75,7 @@ export function Search() {
                         <h2 className='mt-20 text-4xl font-bold font-sans text-white'>La Beauté du Monde à Portée de Clic!</h2>
                         <p className='text-white pb-10'>Notre site vous emmène à la découverte des plus beaux lieux de la planète. Que vous rêviez de paysages époustouflants, de cultures fascinantes ou de destinations insolites, trouvez l'inspiration pour vos voyages. Explorez le monde et préparez des souvenirs inoubliables.</p>
                         <form className='flex flex-col md:flex-row gap-2'>
+                            <input type="hidden" name="token" value={token} />
                             <TemperatureSearch temperature={temperature} setTemperature={setTemperature} />
                             <Activity activity={activity} setActivity={setActivity} />
                             <TravelDate traveldate={traveldate} setTravelDate={setTravelDate} />
