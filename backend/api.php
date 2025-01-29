@@ -8,16 +8,11 @@ $dotenv->load();
 session_start();
 
 
-// Handle CORS preflight requests first
-if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
-    header("Access-Control-Allow-Origin: http://localhost:3000");
-    header("Access-Control-Allow-Methods: POST, OPTIONS");
-    header("Access-Control-Allow-Headers: Content-Type, X-CSRF-Token");
-    header("Access-Control-Allow-Credentials: true");
-    header('Content-type: application/json');
-    http_response_code(200);
-    exit;
-}
+// Add these early in your code for debugging
+error_log('Session ID: ' . session_id());
+error_log('Received Token: ' . ($_SERVER['HTTP_X_CSRF_TOKEN'] ?? 'No token received'));
+error_log('Stored Token: ' . ($_SESSION['csrf_token'] ?? 'No token in session'));
+
 
 // Allow requests from your React app
 header("Access-Control-Allow-Origin: http://localhost:3000");
@@ -26,6 +21,13 @@ header("Access-Control-Allow-Headers: Content-Type, X-CSRF-Token");
 header("Access-Control-Allow-Credentials: true");
 header('Content-type: application/json');
 
+// Handle CORS preflight requests first
+if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
+    http_response_code(200);
+    exit;
+}
+
+
 
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     http_response_code(200);
@@ -33,13 +35,13 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     exit;
 }
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    if (!isset($_SERVER['HTTP_X_CSRF_TOKEN']) || !isTokenOk($_SERVER['HTTP_X_CSRF_TOKEN'])) {
-        http_response_code(403);
-        echo json_encode(['error' => 'Invalid CSRF token']);
-        exit;
-    }
+
+if (!isset($_SERVER['HTTP_X_CSRF_TOKEN']) || !isTokenOk($_SERVER['HTTP_X_CSRF_TOKEN'])) {
+    http_response_code(403);
+    echo json_encode(['error' => 'Invalid CSRF token']);
+    exit;
 }
+
 
 
 // Get the raw POST data
