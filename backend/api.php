@@ -10,8 +10,8 @@ $dotenv->load();
 header('Content-type: application/json');
 
 // Allow requests from your React app
-header("Access-Control-Allow-Origin: *");
-header("Access-Control-Allow-Methods: POST, OPTIONS"); // Allow POST requests
+header("Access-Control-Allow-Origin: http://localhost:3000");
+header(header: "Access-Control-Allow-Methods: POST, OPTIONS"); // Allow POST requests
 header("Access-Control-Allow-Headers: Content-Type"); // Allow JSON content type
 header("Access-Control-Allow-Credentials: true"); 
 
@@ -40,7 +40,7 @@ if ($data === null) {
 // csfr 
 if (!isServerOk($globalUrl)) {
     echo json_encode(['error' => 'Server error 1']);
-    exit; 
+    exit;  
 }
 
 // if (!isTokenOk($data['token'])) {
