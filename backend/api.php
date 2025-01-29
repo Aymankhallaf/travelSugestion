@@ -2,28 +2,43 @@
 require __DIR__ . '/vendor/autoload.php';
 require __DIR__ . '/includes/_functions.php';
 require __DIR__ . '/includes/_config.php';
-session_start();
-
 
 $dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
 $dotenv->load();
-header('Content-type: application/json');
+session_start();
+
+
+// Handle CORS preflight requests first
+if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
+    header("Access-Control-Allow-Origin: http://localhost:3000");
+    header("Access-Control-Allow-Methods: POST, OPTIONS");
+    header("Access-Control-Allow-Headers: Content-Type, X-CSRF-Token");
+    header("Access-Control-Allow-Credentials: true");
+    header('Content-type: application/json');
+    http_response_code(200);
+    exit;
+}
 
 // Allow requests from your React app
 header("Access-Control-Allow-Origin: http://localhost:3000");
-header(header: "Access-Control-Allow-Methods: POST, OPTIONS"); // Allow POST requests
-header("Access-Control-Allow-Headers: Content-Type"); // Allow JSON content type
-header("Access-Control-Allow-Credentials: true"); 
+header("Access-Control-Allow-Methods: POST, OPTIONS");
+header("Access-Control-Allow-Headers: Content-Type, X-CSRF-Token");
+header("Access-Control-Allow-Credentials: true");
+header('Content-type: application/json');
 
-
-var_dump( session_id());
-var_dump($_SESSION);
-// $temperature = getCityWeather("paris", date: '2025-02-01'); // Use current date or dynamic date
 
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     http_response_code(200);
     echo json_encode(['error' => "Invalid methode d'access"]);
     exit;
+}
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    if (!isset($_SERVER['HTTP_X_CSRF_TOKEN']) || !isTokenOk($_SERVER['HTTP_X_CSRF_TOKEN'])) {
+        http_response_code(403);
+        echo json_encode(['error' => 'Invalid CSRF token']);
+        exit;
+    }
 }
 
 
@@ -40,16 +55,12 @@ if ($data === null) {
 // csfr 
 if (!isServerOk($globalUrl)) {
     echo json_encode(['error' => 'Server error 1']);
-    exit;  
+    exit;
 }
-
-// if (!isTokenOk($data['token'])) {
-//     echo json_encode(['error' => 'server error  2']);
-//     exit;
-// }
 
 echo json_encode(['success' => 'Server is ok']);
 
+// $temperature = getCityWeather("paris", date: '2025-02-01'); // Use current date or dynamic date
 // // Extract data from the request
 // $activity = ($data['activity']) ?? null;
 // $traveldate = ($data['traveldate']) ?? null;
