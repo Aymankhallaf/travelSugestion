@@ -20,22 +20,22 @@ export function Search() {
     const [isLoading, setIsLoading] = useState(false);
     const [token, setToken] = useState('');
 
-    // Fetch the token from the backend
-    // useEffect(() => {
-    //     const fetchToken = async () => {
-    //         try {
-    //             const response = await axios.get('http://localhost:8080/startSession.php', {
-    //                 withCredentials: true, // Include credentials (cookies)
-    //             });
-    //             console.log(response.data);
-    //             setToken(response.data);
-    //         } catch (error) {
-    //             console.error('Error fetching data:', error);
+    //Fetch the token from the backend
+    useEffect(() => {
+        const fetchToken = async () => {
+            try {
+                const response = await axios.get('http://localhost:8080/startSession.php', {
+                    withCredentials: true, // Include credentials (cookies)
+                });
+                console.log(response.data);
+                setToken(response.data);
+            } catch (error) {
+                console.error('Error fetching data:', error);
 
-    //         }
-    //     };
-    //     fetchToken();
-    // }, []);
+            }
+        };
+        fetchToken();
+    }, []);
 
     const handleSearch = async (e) => {
         e.preventDefault();
