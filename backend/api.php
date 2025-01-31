@@ -7,9 +7,9 @@ $dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
 $dotenv->load();
 session_start();
 
-
+var_dump(($_SESSION));
 // Add these early in your code for debugging
-error_log('Session ID: ' . session_id());
+error_log('Session ID   : ' . session_id());
 error_log('Received Token: ' . ($_SERVER['HTTP_X_CSRF_TOKEN'] ?? 'No token received'));
 error_log('Stored Token: ' . ($_SESSION['csrf_token'] ?? 'No token in session'));
 
