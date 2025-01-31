@@ -11,7 +11,7 @@ session_set_cookie_params([
     'lifetime' => 3600,
     'path' => '/',
     'domain' => 'localhost',
-    'secure' => false,
+    'secure' => false, //True it would allow HTTPs
     'httponly' => true,
     'samesite' => 'Lax'
 ]);
