@@ -7,7 +7,6 @@ $dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
 $dotenv->load();
 session_start();
 
-var_dump(($_SESSION));
 // Add these early in your code for debugging
 error_log('Session ID   : ' . session_id());
 error_log('Received Token: ' . ($_SERVER['HTTP_X_CSRF_TOKEN'] ?? 'No token received'));
@@ -38,7 +37,13 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
 
 if (!isset($_SERVER['HTTP_X_CSRF_TOKEN']) || !isTokenOk($_SERVER['HTTP_X_CSRF_TOKEN'])) {
     http_response_code(403);
-    echo json_encode(['error' => 'Invalid CSRF token']);
+    echo json_encode([
+        'error' => 'Invalid CSRF token',
+        'debug' => [
+            'received' => $_SERVER['HTTP_X_CSRF_TOKEN'] ?? null,
+            'expected' => $_SESSION['csrf_token'] ?? null
+        ]
+    ]);
     exit;
 }
 

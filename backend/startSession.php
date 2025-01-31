@@ -18,12 +18,12 @@ session_set_cookie_params([
 session_start();
 
 // Generate new token only if none exists or regenerate for each request
-if (empty($_SESSION['csrf_token'])) {
-    $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
+if (empty($_SESSION['csrfToken'])) {
+    $_SESSION['csrfToken'] = bin2hex(random_bytes(32));
 }
 
 // Return token and session ID
 echo json_encode([
-    'csrf_token' => $_SESSION['csrf_token'],
+    'csrfToken' => $_SESSION['csrfToken'],
     'session_id' => session_id()
 ]);

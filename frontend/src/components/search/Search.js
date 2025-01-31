@@ -28,7 +28,7 @@ export function Search() {
                     withCredentials: true, // Include credentials (cookies)
                 });
                 console.log(response.data);
-                setToken(response.data.csrf_token);
+                setToken(response.data.csrfToken);
             } catch (error) {
                 console.error('Error fetching data:', error);
 
@@ -40,6 +40,13 @@ export function Search() {
     const handleSearch = async (e) => {
         e.preventDefault();
         setIsLoading(true);
+        // Verify token exists before sending
+        if (!token) {
+            console.error('CSRF token missing');
+            await initializeSession(); // Add session initialization logic
+        }
+
+
         // Prepare the data to send
         const searchData = {
             temperature: temperature,
