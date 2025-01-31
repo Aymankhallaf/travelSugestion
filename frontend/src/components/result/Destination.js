@@ -11,7 +11,7 @@ export function Destination({ destination }) {
     const { city, temperature, photos } = destination;
 
     // Extract temperature values
-    const currentTemp = temperature?.current || 'N/A';
+    const avgTemp = temperature?.avg || 'N/A';
     const minTemp = temperature?.min || 'N/A';
     const maxTemp = temperature?.max || 'N/A';
 
@@ -38,7 +38,7 @@ export function Destination({ destination }) {
 
                         <div className="flex gap-2 items-center">
                             <FaTemperatureHalf />
-                            <span className="text-slate-600 ml-2">{currentTemp}°C (Min: {minTemp}°C, Max: {maxTemp}°C)°C</span>
+                            <span className="text-slate-600 ml-2">{avgTemp}°C (Min: {minTemp}°C, Max: {maxTemp}°C)°C</span>
                         </div>
                     </div>
 
