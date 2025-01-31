@@ -11,7 +11,7 @@ import { Header } from './Header';
 export function Search() {
     const [temperature, setTemperature] = useState(25);
     const [activity, setActivity] = useState("beach");
-    const [traveldate, setTravelDate] = useState(""); // Ensure controlled input
+    const [traveldate, setTravelDate] = useState(""); 
     const [results, setResults] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
     const [token, setToken] = useState('');
@@ -45,10 +45,10 @@ export function Search() {
         e.preventDefault();
         setIsLoading(true);
     
-        console.log("Using CSRF Token:", token); // Debugging
+        // console.log("Using CSRF Token:", token); // Debugging
     
         if (!token) {
-            console.log("Refreshing expired session...");
+            // console.log("Refreshing expired session...");
             const success = await initializeSession();
             if (!success) {
                 alert("Session initialization failed");
@@ -75,9 +75,9 @@ export function Search() {
             console.log("API Response:", response.data);
             setResults(response.data.results || []);
         } catch (error) {
-            console.error("Error fetching data:", error);
+            // console.error("Error fetching data:", error);
             if (error.response) {
-                console.error("Server Response:", error.response.data);
+                // console.error("Server Response:", error.response.data);
             }
             setResults([]);
         } finally {
