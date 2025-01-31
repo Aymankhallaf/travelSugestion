@@ -1,6 +1,6 @@
 # Composer dependencies
 /backend/vendor/
-/docker/
+docker/
 # Node.js dependencies
 /frontend/node_modules/
 
@@ -22,3 +22,5 @@
 # System files
 .DS_Store
 Thumbs.db
+
+*.htaccess
