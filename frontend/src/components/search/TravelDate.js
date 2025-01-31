@@ -5,7 +5,7 @@ import { FaCalendarAlt } from 'react-icons/fa';
 export function TravelDate({ travelDate, setTravelDate }) {
 
 
-    return (
+    return ( 
         <div className="flex-1 relative">
             <label htmlFor="travel-date" className="sr-only">
                 Travel Date
@@ -15,8 +15,11 @@ export function TravelDate({ travelDate, setTravelDate }) {
                 <input
                     type="date"
                     id="travel-date"
-                    className="mt-1 block w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200"
+                    className="mt-1 block w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-teal-500 focus:border-teal-500 transition-all duration-200"
                     aria-label="Travel Date"
+                    onChange={(e) => {
+                        setTravelDate(Date(e.target.value));
+                      }}
                 />
             </div>
         </div>
