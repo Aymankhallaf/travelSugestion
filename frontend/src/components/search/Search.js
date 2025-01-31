@@ -51,9 +51,7 @@ export function Search() {
         const searchData = {
             temperature: temperature,
             activity: activity,
-            traveldate: traveldate,
-            token: token,
-        };
+            traveldate: traveldate        };
 
         try {
             // Send a POST request to the backend using Axios
