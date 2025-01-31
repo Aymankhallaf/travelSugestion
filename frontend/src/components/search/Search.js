@@ -4,75 +4,87 @@ import { Activity } from './Activity';
 import { TravelDate } from './TravelDate';
 import { Destination } from '../result/Destination';
 import { FaSearch } from 'react-icons/fa';
-import SearchBg from '../../assets/img//bg-search.webp'
+import SearchBg from '../../assets/img/bg-search.webp';
 import axios from 'axios';
 import { Header } from './Header';
-
-
 
 export function Search() {
     const [temperature, setTemperature] = useState(25);
     const [activity, setActivity] = useState("beach");
-    const [traveldate, setTravelDate] = useState();
-    // Results to test API calls;
+    const [traveldate, setTravelDate] = useState(""); // Ensure controlled input
     const [results, setResults] = useState([]);
-    // track loading state(to disable/enable search button)
     const [isLoading, setIsLoading] = useState(false);
     const [token, setToken] = useState('');
 
-    //Fetch the token from the backend
-    useEffect(() => {
-        const fetchToken = async () => {
-            try {
-                const response = await axios.get('http://localhost:8080/backend/startSession.php', {
-                    withCredentials: true, // Include credentials (cookies)
-                });
-                console.log(response.data);
+    // Function to fetch CSRF token and initialize session
+    const initializeSession = async () => {
+        try {
+            const response = await axios.get('http://localhost:8080/backend/startSession.php', {
+                withCredentials: true, // Ensure session cookies are included
+            });
+            if (response.data.csrfToken) {
                 setToken(response.data.csrfToken);
-            } catch (error) {
-                console.error('Error fetching data:', error);
-
+                console.log("Session initialized:", response.data);
+                return true;
+            } else {
+                console.error("Failed to initialize session, no token received");
+                return false;
             }
-        };
-        fetchToken();
+        } catch (error) {
+            console.error("Error initializing session:", error);
+            return false;
+        }
+    };
+
+    // Fetch token on component mount
+    useEffect(() => {
+        initializeSession();
     }, []);
 
     const handleSearch = async (e) => {
         e.preventDefault();
         setIsLoading(true);
-        // Verify token exists before sending
+    
+        console.log("Using CSRF Token:", token); // Debugging
+    
         if (!token) {
-            console.error('CSRF token missing');
-            await initializeSession(); // Add session initialization logic
+            console.log("Refreshing expired session...");
+            const success = await initializeSession();
+            if (!success) {
+                alert("Session initialization failed");
+                setIsLoading(false);
+                return;
+            }
         }
-
-
-        // Prepare the data to send
+    
         const searchData = {
             temperature: temperature,
             activity: activity,
-            traveldate: traveldate        };
-
+            traveldate: traveldate
+        };
+    
         try {
-            // Send a POST request to the backend using Axios
-            const response = await axios.post('http://localhost:8080/backend/api.php', searchData, {
+            const response = await axios.post("http://localhost:8080/backend/api.php", searchData, {
                 headers: {
-                    'Content-Type': 'application/json',
-                    'X-CSRF-Token': token,
+                    "Content-Type": "application/json",
+                    "X-CSRF-Token": token, // Send the token
                 },
                 withCredentials: true
             });
-
-            const data = response.data;
-            console.log(data);
-            setResults(data.results || []);
+    
+            console.log("API Response:", response.data);
+            setResults(response.data.results || []);
         } catch (error) {
-            console.error('Error fetching data:', error);
+            console.error("Error fetching data:", error);
+            if (error.response) {
+                console.error("Server Response:", error.response.data);
+            }
             setResults([]);
         } finally {
             setIsLoading(false);
         }
     };
+    
 
     return (
         <div className=''>

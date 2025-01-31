@@ -21,7 +21,6 @@ session_start();
 if (empty($_SESSION['csrfToken'])) {
     $_SESSION['csrfToken'] = bin2hex(random_bytes(32));
 }
-
 // Return token and session ID
 echo json_encode([
     'csrfToken' => $_SESSION['csrfToken'],
