@@ -7,13 +7,13 @@ export function Activity({ activity, setActivity }) {
     return (
 
         <div className="flex-1 relative">
-            <label chtmlFor="activity" className="sr-only">Activity</label>
+            <label htmlFor="activity" className="sr-only">Activity</label>
             <div className="relative">
                 <FaRunning className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
 
                 <select
-                    id="activity"
-                    className="mt-1 block w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200"
+                                    className="mt-1 block w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-teal-500 focus:border-teal-500 transition-all duration-200"
+    id="activity"
                     value={activity}
                     onChange={(e) => setActivity(e.target.value)}
                     aria-label="Select activity"
