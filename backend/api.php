@@ -8,9 +8,9 @@ $dotenv->load();
 session_start();
 
 //  debugging code 
-error_log('Session ID   : ' . session_id());
-error_log('Received Token: ' . ($_SERVER['HTTP_X_CSRF_TOKEN'] ?? 'No token received'));
-error_log('Stored Token: ' . ($_SESSION['csrfToken'] ?? 'No token in session'));
+// error_log('Session ID   : ' . session_id());
+// error_log('Received Token: ' . ($_SERVER['HTTP_X_CSRF_TOKEN'] ?? 'No token received'));
+// error_log('Stored Token: ' . ($_SESSION['csrfToken'] ?? 'No token in session'));
 
 
 // Allow requests from your React app
